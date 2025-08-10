@@ -26,11 +26,8 @@ app.use(limiter);
 // Validación simple por header (opcional)
 const validateRequest = (req, res, next) => {
     const bundleId = req.headers['x-bundle-id'];
-    console.log(bundleId);
     const expectedBundleId = process.env.EXPECTED_BUNDLE_ID;
-    console.log(expectedBundleId);
     if (expectedBundleId && bundleId !== expectedBundleId) {
-        console.log("Son iguales")
         return res.status(403).json({ error: 'Bundle ID no autorizado' });
     }
     next();
@@ -43,6 +40,7 @@ app.get('/api/keys/:service', validateRequest, (req, res) => {
     // Mapeo de servicios a variables de entorno
     const serviceMap = {
         'supabase-larocaplay': process.env.LAROCAPLAY_SB_ANON_KEY,
+        "sb-larocaplay-project-url": process.env.LAROCAPLAY_SB_PROJECT_URL,
         'stripe': process.env.STRIPE_PUBLISHABLE_KEY,
     };
     
