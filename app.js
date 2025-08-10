@@ -26,9 +26,11 @@ app.use(limiter);
 // Validación simple por header (opcional)
 const validateRequest = (req, res, next) => {
     const bundleId = req.headers['x-bundle-id'];
+    console.log(bundleId);
     const expectedBundleId = process.env.EXPECTED_BUNDLE_ID;
-    
+    console.log(expectedBundleId);
     if (expectedBundleId && bundleId !== expectedBundleId) {
+        console.log("Son iguales")
         return res.status(403).json({ error: 'Bundle ID no autorizado' });
     }
     next();
