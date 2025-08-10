@@ -63,6 +63,8 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Endpoint no encontrado' });
 });
 
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
 app.listen(PORT, () => {
     console.log(`🔑 API Keys server running on port ${PORT}`);
 });
